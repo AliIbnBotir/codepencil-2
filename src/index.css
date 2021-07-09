@@ -1,13 +1,210 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+.App {
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+  height: 100vh;
+  overflow: hidden;
+}
+.editor-pane {
+  background-color: hsl(225, 6%, 25%);
+  height: 100%;
+}
+.container {
+  width: 100%;
+  flex: 1 1 100%;
+  height: calc(100% - 65px);
+  display: flex;
+}
+.pane {
+  height: 100%;
+  display: flex;
+  flex: 1 1 50%;
+  flex-direction: column;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.editor-container {
+  flex-grow: 1;
+  flex-basis: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 1rem;
+
+  box-sizing: border-box;
+  background-color: hsl(225, 6%, 25%);
+  height: 100%;
+}
+.resizable {
+  padding: 15px;
+}
+.editor-container.collapsed {
+  flex-grow: 0;
+  flex-basis: 0 !important;
+}
+
+.editor-container.collapsed .CodeMirror-scroll {
+  position: absolute;
+  overflow: hidden !important;
+}
+
+.expand-collapse-btn {
+  margin-left: 0.5rem;
+  height: 25px;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.editor-title {
+  display: flex;
+  justify-content: space-between;
+  background-color: hsl(225, 6%, 13%);
+  color: white;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  border-top-right-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
+}
+
+.CodeMirror {
+  height: 100% !important;
+}
+.editor-container.collapsed > .code-mirror-wrapper {
+  max-height: 0;
+}
+.code-mirror-wrapper {
+  flex-grow: 1;
+  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  overflow: hidden;
+  flex-basis: 0;
+}
+.main-header {
+  height: 65px;
+  flex: 1 1 100%;
+  width: 100%;
+  position: revert;
+  background-color: rgb(38, 50, 56);
+}
+.header-wrap {
+  box-shadow: 0 2px 5px rgb(0 0 0 / 50%);
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-wrap: wrap;
+}
+.logo-root {
+  width: 100%;
+  cursor: pointer;
+}
+button {
+  background-color: rgb(68, 72, 87);
+  color: white;
+  outline: none;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  font-family: inherit;
+  font-size: 0.75rem;
+  text-shadow: none;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-decoration: none !important;
+  text-align: center;
+  font-weight: 400 !important;
+  cursor: pointer;
+  border-radius: 2px;
+  height: 45px;
+  padding: 5px 10px;
+}
+.nav-wrap > button:hover {
+  background-color: rgb(113 113 113);
+}
+.menu-bar-icon {
+  margin-right: 15px;
+  font-size: 25px;
+}
+.menu-bar-icon.user-icon {
+  margin: 0;
+  font-size: 35px;
+}
+.username > a {
+  list-style: none;
+  text-decoration: none;
+  color: #a8a8a8;
+}
+.logo-box {
+  display: flex;
+  flex: 1 1 10%;
+}
+.project-info {
+  flex: 1 1 50%;
+  height: 100%;
+  padding: 10px 0;
+  color: white;
+}
+.project-name {
+  font-size: 0.8rem;
+}
+.editable-title > a {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+.editor-action-menu {
+  flex: 1 1 40%;
+  display: flex;
+  align-items: center;
+}
+.nav-wrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+button {
+  display: flex;
+  align-items: center;
+}
+.settings-outer {
+  position: absolute;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0.3;
+  z-index: 20;
+}
+.settings {
+  display: none;
+  opacity: 1;
+  position: absolute;
+  border: 3px solid #252830;
+  background: #27292d;
+  top: 70px;
+  left: 1rem;
+  right: 1rem;
+  bottom: 2rem;
+  margin: 0 auto auto;
+  padding: 0;
+  color: white;
+  border-radius: 4px;
+  z-index: 200;
+  -webkit-transform: scale(0.9);
+  transform: scale(0.9);
+  -webkit-transform-origin: center center;
+  transform-origin: center center;
+  width: 700px;
+  max-width: calc(100% - 2rem);
+  max-height: 80vh;
 }
