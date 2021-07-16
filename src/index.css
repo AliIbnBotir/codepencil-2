@@ -178,15 +178,19 @@ button {
 }
 .settings-outer {
   position: absolute;
-  display: none;
+
   width: 100%;
   height: 100%;
   background-color: #000;
   opacity: 0.3;
   z-index: 20;
 }
-.settings {
+.settings-outer.closed {
   display: none;
+}
+.settings {
+  display: flex;
+  flex-wrap: wrap;
   opacity: 1;
   position: absolute;
   border: 3px solid #252830;
@@ -207,4 +211,214 @@ button {
   width: 700px;
   max-width: calc(100% - 2rem);
   max-height: 80vh;
+}
+.settings.closed {
+  display: none;
+}
+.settings-header {
+  flex: 1 1 100%;
+  max-width: 94%;
+  margin: 0 20px 0 auto;
+  flex-wrap: wrap;
+  display: flex;
+  border-bottom: 2px solid #2c303a;
+
+  align-items: center;
+  height: 10%;
+  position: relative;
+}
+.settings-header .title {
+  display: flex;
+  flex: 1 1 92%;
+  height: 100%;
+  align-items: center;
+}
+.settings-header .title h2 {
+  height: 100%;
+  align-items: center;
+
+  padding: 15px 0 0 0;
+  border-bottom: 2px solid #47cf73;
+}
+.settings-close-save-btn button {
+  padding: 12px;
+  height: 35px;
+  width: 35px;
+}
+.settings-close-save-btn button .x-btn {
+  font-size: 15px;
+}
+.settings-tabs-wrapper {
+  flex: 1 1 100%;
+  display: flex;
+  height: 90%;
+  flex-wrap: wrap;
+  padding: 20px 0 0 5px;
+}
+.tabs-nav {
+  flex: 1 1 30%;
+  height: 100%;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+}
+.tabs-nav a {
+  display: block;
+  margin: 0 0 5px 0;
+  text-decoration: none;
+  color: white;
+  font-size: 25px;
+  padding-left: 20px;
+  cursor: pointer;
+}
+.tabs-nav a:hover {
+  background-color: rgb(70, 69, 69);
+}
+.tabs-nav a.active-nav-html {
+  font-weight: 700;
+
+  background-color: rgb(70, 69, 69);
+  border-left: 2px solid #47cf73;
+}
+.tabs-nav a.active-nav-css {
+  font-weight: 700;
+
+  background-color: rgb(70, 69, 69);
+  border-left: 2px solid #47cf73;
+}
+.tabs-nav a.active-nav-js {
+  font-weight: 700;
+  background-color: rgb(70, 69, 69);
+  border-left: 2px solid #47cf73;
+}
+.tabs-group {
+  padding: 0 20px 0 0;
+}
+.tabs .setting {
+  display: none;
+  flex: 1 1 70%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 0 20px 0 0;
+}
+.tabs .tab-page-html.active-html,
+.tab-page-css.active-css,
+.tab-page-js.active-js {
+  display: block;
+}
+.setting-row {
+  border-left: 3px solid #444857;
+  margin: 0 0 20px 0;
+  padding: 15px;
+  position: relative;
+  background: linear-gradient(
+    to right,
+    rgba(155, 157, 173, 0.1),
+    rgba(155, 157, 173, 0)
+  );
+}
+.setting-row h4 {
+  font-size: 22px;
+  line-height: 1.7;
+  font-weight: 400;
+}
+.setting-row input,
+textarea {
+  width: 100%;
+  height: 45px;
+  margin-top: 10px;
+  font-size: 20px;
+  outline: none;
+  font-family: "Courier New", Courier, monospace;
+  padding: 0 0 0 10px;
+}
+.stuff-adder-input {
+  height: 200px !important;
+  font-size: 15px !important;
+
+  padding: 10px 5px 0 10px !important;
+}
+.setting-row input::placeholder {
+  font-family: "Courier New", Courier, monospace;
+}
+.help-understand {
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  cursor: pointer;
+}
+.help-understand svg {
+  font-size: 10px;
+
+  width: 15px !important;
+  height: 15px;
+  padding: 2px;
+  background-color: rgb(68, 72, 87);
+}
+.understand-info {
+  position: absolute;
+  display: none;
+  z-index: 10;
+  left: 100px;
+  top: 0;
+  margin-left: 12px;
+  border: 5px solid #5a5f73;
+  box-shadow: 2px 2px 8px rgb(0 0 0 / 50%);
+  width: 300px;
+  padding: 20px;
+  background: black;
+  text-align: left;
+  font-weight: normal;
+  color: #aaaebc;
+  cursor: auto;
+}
+.understand-info h4 {
+  color: white;
+}
+.understand-info.active-info-html-class-add {
+  display: block;
+}
+.understand-info.active-info-head-stuff-add {
+  display: block;
+}
+.understand-info.active-info-project-title-add {
+  display: block;
+}
+.info-close-btn {
+  position: absolute;
+  top: 10px;
+  cursor: pointer;
+  right: 8px;
+}
+.setting-form .libraries-selector {
+  display: flex;
+  align-items: center;
+  margin: 10px 0 5px 0;
+}
+.setting-form input {
+  width: 25px;
+  height: 25px;
+  margin: 0 10px 0 0;
+}
+.setting-form label {
+  font-size: 20px;
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

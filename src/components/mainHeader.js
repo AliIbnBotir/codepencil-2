@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "../index.css";
-import Settings from "./Settings";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog, faUser, faCloud } from "@fortawesome/free-solid-svg-icons";
 
@@ -17,21 +16,11 @@ export default function mainHeader(props) {
 	} = props;
 	return (
 		<div className="main-header">
-			<Settings
-				setPenSetting={setPenSetting}
-				setHtmlSetting={setHtmlSetting}
-				setCssSetting={setCssSetting}
-				setJsSetting={setJsSetting}
-				penSetting={penSetting}
-				htmlSetting={htmlSetting}
-				cssSetting={cssSetting}
-				jsSetting={jsSetting}
-			/>
 			<div className="header-wrap">
-				<div className="logo-box" onClick="location.href='https://google.com';">
+				<div className="logo-box">
 					<h1 className="logo-root">
 						<a href="/" className="logo-for-desktop">
-							<img src="" alt="" />
+							logo
 						</a>
 					</h1>
 				</div>
