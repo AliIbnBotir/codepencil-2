@@ -40,6 +40,7 @@ function App() {
 	const [jquery, setJquery] = useLocalStorage("jquery", "");
 	const [animateJs, setAnimateJs] = useLocalStorage("animateJs", "");
 	const [videoJs, setVideoJs] = useLocalStorage("videoJs", "");
+	const [videoCss, setVideoCss] = useLocalStorage("videoCss", "");
 	const [chartJs, setChartJs] = useLocalStorage("chartJs", "");
 
 	{
@@ -93,8 +94,9 @@ function App() {
 				${tailWindCss}
 				${animateCss}
 				${fontAwesomeCss}
+				${videoCss}
 			</head>
-        	<body>${html} 	${bootstrapJs}</body>
+        	<body>${html} 	${bootstrapJs} ${jquery} ${chartJs} ${videoJs} ${animateJs} </body>
           	<style>${css}</style>
           	<script >${js}</script>
 		  
@@ -146,6 +148,7 @@ function App() {
 				setJquery={setJquery}
 				setAnimateJs={setAnimateJs}
 				setVideoJs={setVideoJs}
+				setVideoCss={setVideoCss}
 				setChartJs={setChartJs}
 				//
 
@@ -190,6 +193,7 @@ function App() {
 			/>
 			<div className="container">
 				<Resizable
+					className="resize-panel"
 					minWidth={"200px"}
 					maxHeight={"100%"}
 					minHeight={"100%"}
@@ -213,6 +217,7 @@ function App() {
 							displayName="JS"
 							value={js}
 							onChange={setJs}
+							className="js-editor"
 						/>
 					</div>
 				</Resizable>

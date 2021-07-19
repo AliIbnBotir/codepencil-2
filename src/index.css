@@ -16,6 +16,7 @@ body {
 }
 .editor-pane {
   background-color: hsl(225, 6%, 25%);
+  border-right: 10px solid #444857;
   height: 100%;
 }
 .container {
@@ -37,7 +38,6 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
-  padding: 1rem;
 
   box-sizing: border-box;
   background-color: hsl(225, 6%, 25%);
@@ -70,8 +70,6 @@ body {
   background-color: hsl(225, 6%, 13%);
   color: white;
   padding: 0.5rem 0.5rem 0.5rem 1rem;
-  border-top-right-radius: 0.5rem;
-  border-top-left-radius: 0.5rem;
 }
 
 .CodeMirror {
@@ -80,10 +78,12 @@ body {
 .editor-container.collapsed > .code-mirror-wrapper {
   max-height: 0;
 }
+.js-editor {
+  border-bottom: none;
+}
 .code-mirror-wrapper {
   flex-grow: 1;
-  border-bottom-right-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
+  border-bottom: 3px solid #444857;
   overflow: hidden;
   flex-basis: 0;
 }

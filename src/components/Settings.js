@@ -17,6 +17,7 @@ export default function Settings(props) {
 		//kutubxona ornatuvchilari
 		/*css kutubxona ornatuvchilari */
 		setBootstrapCss,
+
 		setBootstrapJs,
 		setTailwindCss,
 		setAnimateCss,
@@ -25,6 +26,7 @@ export default function Settings(props) {
 		setJquery,
 		setAnimateJs,
 		setVideoJs,
+		setVideoCss,
 		setChartJs,
 
 		//
@@ -69,7 +71,119 @@ export default function Settings(props) {
 	{
 		//checkboxlar uchun ozgaruvchilar
 	}
+	//Kutubxonalar uchun object
+	const LibrariesContainerObject = {
+		/*Css uchun kutubconalar */
+		Bootstrap: {
+			check: bootstrapcheck,
+			onChange: () => {
+				setBootstrapCheck(!bootstrapcheck);
+				if (!bootstrapcheck) {
+					setBootstrapCss(
+						'<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">'
+					);
 
+					setBootstrapJs(
+						'<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>'
+					);
+				} else if (bootstrapcheck) {
+					setBootstrapCss("");
+					setBootstrapJs("");
+				}
+			},
+		},
+		TailWind: {
+			check: tailwindCheck,
+			onChange: () => {
+				setTailwindCheck(!tailwindCheck);
+				if (!tailwindCheck) {
+					setTailwindCss(
+						'<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">'
+					);
+				} else if (tailwindCheck) {
+					setTailwindCss("");
+				}
+			},
+		},
+		Animate: {
+			checkCss: animateCssCheck,
+			onChangeCss: () => {
+				setAnimateCssCheck(!animateCssCheck);
+				if (!animateCssCheck) {
+					setAnimateCss(
+						'<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>'
+					);
+				} else if (animateCssCheck) {
+					setAnimateCss("");
+				}
+			},
+			checkJs: animateJsCheck,
+			onChangeJs: () => {
+				setAnimateJsCheck(!animateJsCheck);
+				if (!animateJsCheck) {
+					setAnimateJs("");
+				}
+			},
+		},
+		FontAwesome: {
+			check: fontAwesomeCheck,
+			onChange: () => {
+				setFontAwesomeCheck(!fontAwesomeCheck);
+				if (!fontAwesomeCheck) {
+					setFontAwesomeCss(
+						'<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">'
+					);
+				} else if (fontAwesomeCheck) {
+					setFontAwesomeCss("");
+				}
+			},
+		},
+
+		/*Js uchun kutubxonalar */
+		Jquery: {
+			check: jqueryCheck,
+			onChange: () => {
+				setJqueryCheck(!jqueryCheck);
+				if (!jqueryCheck) {
+					setJquery(
+						'<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>'
+					);
+				} else if (jqueryCheck) {
+					setJquery("");
+				}
+			},
+		},
+		ChartJs: {
+			check: chartJsCheck,
+			onChange: () => {
+				setChartJsCheck(!chartJsCheck);
+				if (!chartJsCheck) {
+					setChartJs(
+						'<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>'
+					);
+				} else if (chartJsCheck) {
+					setChartJs("");
+				}
+			},
+		},
+		VideoJs: {
+			checkJS: videoJsCheck,
+			onChangeJs: () => {
+				setVideoJsCheck(!videoJsCheck);
+				if (!videoJsCheck) {
+					setVideoJs(
+						'<script src="//vjs.zencdn.net/5.4.6/video.min.js"></script>'
+					);
+					setVideoCss(
+						'<link href="//vjs.zencdn.net/5.4.6/video-js.min.css" rel="stylesheet">'
+					);
+				} else if (videoJsCheck) {
+					setVideoJs("");
+					setVideoCss("");
+				}
+			},
+		},
+	};
 	return (
 		<div className={`settings ${penSetting ? "" : "closed"}`}>
 			<header className="settings-header">
@@ -338,22 +452,8 @@ export default function Settings(props) {
 							<div className="libraries-selector">
 								<input
 									type="checkbox"
-									checked={bootstrapcheck}
-									onChange={() => {
-										setBootstrapCheck(!bootstrapcheck);
-										if (!bootstrapcheck) {
-											setBootstrapCss(
-												'<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">'
-											);
-
-											setBootstrapJs(
-												'<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>'
-											);
-										} else if (bootstrapcheck) {
-											setBootstrapCss("");
-											setBootstrapJs("");
-										}
-									}}
+									checked={LibrariesContainerObject.Bootstrap.check}
+									onChange={LibrariesContainerObject.Bootstrap.onChange}
 									name="css-library"
 									id="bootstrapCss"
 								/>
@@ -365,17 +465,8 @@ export default function Settings(props) {
 							<div className="libraries-selector">
 								<input
 									type="checkbox"
-									checked={tailwindCheck}
-									onChange={() => {
-										setTailwindCheck(!tailwindCheck);
-										if (!tailwindCheck) {
-											setTailwindCss(
-												'<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">'
-											);
-										} else if (tailwindCheck) {
-											setTailwindCss("");
-										}
-									}}
+									checked={LibrariesContainerObject.TailWind.check}
+									onChange={LibrariesContainerObject.TailWind.onChange}
 									name="css-libraries"
 									id="tailwindCss"
 								/>
@@ -387,17 +478,8 @@ export default function Settings(props) {
 							<div className="libraries-selector">
 								<input
 									type="checkbox"
-									checked={animateCssCheck}
-									onChange={() => {
-										setAnimateCssCheck(!animateCssCheck);
-										if (!animateCssCheck) {
-											setAnimateCss(
-												'<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>'
-											);
-										} else if (animateCssCheck) {
-											setAnimateCss("");
-										}
-									}}
+									checked={LibrariesContainerObject.Animate.checkCss}
+									onChange={LibrariesContainerObject.Animate.onChangeCss}
 									name="css-libraries"
 									id="animateCss"
 								/>
@@ -409,17 +491,8 @@ export default function Settings(props) {
 							<div className="libraries-selector">
 								<input
 									type="checkbox"
-									checked={fontAwesomeCheck}
-									onChange={() => {
-										setFontAwesomeCheck(!fontAwesomeCheck);
-										if (!fontAwesomeCheck) {
-											setFontAwesomeCss(
-												'<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">'
-											);
-										} else if (fontAwesomeCheck) {
-											setFontAwesomeCss("");
-										}
-									}}
+									checked={LibrariesContainerObject.FontAwesome.check}
+									onChange={LibrariesContainerObject.FontAwesome.onChange}
 									name="css-libraries"
 									id="fontAwesome"
 								/>
@@ -492,88 +565,56 @@ export default function Settings(props) {
 						<h4>Add JS libraries</h4>
 						<form action="" className="setting-form js-setting-form">
 							{
-								//Bootstrap uchun checkbox
+								//Jquery uchun checkbox
 							}
 							<div className="libraries-selector">
 								<input
 									type="checkbox"
-									checked={jqueryCheck}
-									onChange={() => {
-										setJqueryCheck(!jqueryCheck);
-										if (!jqueryCheck) {
-											setJqueryCheck();
-											// togirla '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">'
-										} else if (!jqueryCheck) {
-											setJquery("");
-										}
-									}}
+									checked={LibrariesContainerObject.Jquery.check}
+									onChange={LibrariesContainerObject.Jquery.onChange}
 									name="css-library"
 									id="bootstrapCss"
 								/>
 								<label htmlFor="bootstrapCss">Jquery</label>
 							</div>
 							{
-								//TailWind uchun checkbox
+								//Chartjs uchun checkbox
 							}
 							<div className="libraries-selector">
 								<input
 									type="checkbox"
-									onChange={() => {
-										setTailwindCheck(!tailwindCheck);
-										if (tailwindCheck) {
-											setTailwindCss(
-												'<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">'
-											);
-										} else if (!tailwindCheck) {
-											setTailwindCss("");
-										}
-									}}
+									checked={LibrariesContainerObject.ChartJs.check}
+									onChange={LibrariesContainerObject.ChartJs.onChange}
 									name="css-libraries"
 									id="tailwindCss"
 								/>
-								<label htmlFor="tailwindCss">TailWindCss</label>
+								<label htmlFor="tailwindCss">ChartJs</label>
 							</div>
 							{
-								//AnimateCss uchun checkbox
+								//AnimateJS uchun checkbox
 							}
 							<div className="libraries-selector">
 								<input
 									type="checkbox"
-									onChange={() => {
-										setAnimateCssCheck(!animateCssCheck);
-										if (animateCssCheck) {
-											setAnimateCss(
-												'<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>'
-											);
-										} else if (!animateCssCheck) {
-											setAnimateCss("");
-										}
-									}}
+									checked={LibrariesContainerObject.Animate.checkJs}
+									onChange={LibrariesContainerObject.Animate.onchangeJs}
 									name="css-libraries"
 									id="animateCss"
 								/>
-								<label htmlFor="animateCss">AnimateCss</label>
+								<label htmlFor="animateCss">AnimateJS</label>
 							</div>
 							{
-								//FontAwesome uchun checkbox
+								//VideoJS uchun checkbox
 							}
 							<div className="libraries-selector">
 								<input
 									type="checkbox"
-									onChange={() => {
-										setFontAwesomeCheck(!fontAwesomeCheck);
-										if (fontAwesomeCheck) {
-											setFontAwesomeCss(
-												'<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">'
-											);
-										} else if (!fontAwesomeCheck) {
-											setFontAwesomeCss("");
-										}
-									}}
+									checked={LibrariesContainerObject.VideoJs.checkJS}
+									onChange={LibrariesContainerObject.VideoJs.onChangeJs}
 									name="css-libraries"
 									id="fontAwesome"
 								/>
-								<label htmlFor="fontAwesome">FontAwesome</label>
+								<label htmlFor="fontAwesome">VideoJs</label>
 							</div>
 						</form>
 					</div>

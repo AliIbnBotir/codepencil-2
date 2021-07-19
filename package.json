@@ -9,6 +9,7 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "chalk": "^2.4.2",
     "codemirror": "^5.62.0",
     "gh-pages": "^3.2.3",
     "re-resizable": "^6.9.0",
@@ -38,5 +39,5 @@
   "devDependencies": {
     "prettier": "2.3.2"
   },
-  "homepage": "https://github.com/AliIbnBotir/codepencil-2.git"
+  "homepage": "https://aliibnbotir.github.io/codepencil-2/"
 }
