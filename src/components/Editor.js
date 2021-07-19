@@ -15,11 +15,15 @@ export default function Editor(props) {
 	function handleChange(editor, data, value) {
 		onChange(value);
 	}
+	const MyHandle = (props) => {
+		return <div ref={props.innerRef} className="foo" {...props} />;
+	};
 
 	return (
 		<Resizable
 			className={`editor-container ${open ? "" : "collapsed"}`}
 			boundsByDirection={true}
+			enable={{ right: false, left: false, top: true }}
 		>
 			<div className="editor-title">
 				{displayName}

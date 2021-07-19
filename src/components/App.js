@@ -198,6 +198,7 @@ function App() {
 					maxHeight={"100%"}
 					minHeight={"100%"}
 					defaultSize={{ width: "50%" }}
+					enable={{ bottom: false, right: true }}
 				>
 					<div className="pane editor-pane">
 						<Editor
