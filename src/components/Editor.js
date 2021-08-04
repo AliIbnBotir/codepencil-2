@@ -8,10 +8,21 @@ import { Controlled as ControlledEditor } from "react-codemirror2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCompressAlt, faExpandAlt } from "@fortawesome/free-solid-svg-icons";
 import { Resizable } from "re-resizable";
-export default function Editor(props) {
-	const { language, displayName, value, onChange } = props;
-	const [open, setOpen] = useState(true);
 
+export default function Editor(props) {
+	const {
+		language,
+		displayName,
+		value,
+		onChange,
+		top,
+		HtmlWrapperCollapse,
+		CssWrapperCollapse,
+		JsWrapperCollapse,
+		setHtmlWrapperCollapse,
+		setCssWrapperCollapse,
+		setJsWrapperCollapse,
+	} = props;
 	function handleChange(editor, data, value) {
 		onChange(value);
 	}
@@ -19,18 +30,29 @@ export default function Editor(props) {
 		return <div ref={props.innerRef} className="foo" {...props} />;
 	};
 
+	const [open, setOpen] = useState(true);
 	return (
 		<Resizable
 			className={`editor-container ${open ? "" : "collapsed"}`}
 			boundsByDirection={true}
-			enable={{ right: false, left: false, top: true }}
+			enable={{ right: false, left: false, top: top }}
+			maxWidth={"100%"}
 		>
 			<div className="editor-title">
 				{displayName}
 				<button
 					type="button"
 					className="expand-collapse-btn"
-					onClick={() => setOpen((prevOpen) => !prevOpen)}
+					onClick={() => {
+						setOpen((prevOpen) => !prevOpen);
+						if (language === "xml") {
+							setHtmlWrapperCollapse(!HtmlWrapperCollapse);
+						} else if (language === "css") {
+							setCssWrapperCollapse(!CssWrapperCollapse);
+						} else if (language === "javascript") {
+							setJsWrapperCollapse(!JsWrapperCollapse);
+						}
+					}}
 				>
 					<FontAwesomeIcon icon={open ? faCompressAlt : faExpandAlt} />
 				</button>

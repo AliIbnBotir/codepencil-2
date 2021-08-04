@@ -573,9 +573,9 @@ export default function Settings(props) {
 									checked={LibrariesContainerObject.Jquery.check}
 									onChange={LibrariesContainerObject.Jquery.onChange}
 									name="css-library"
-									id="bootstrapCss"
+									id="Jquery"
 								/>
-								<label htmlFor="bootstrapCss">Jquery</label>
+								<label htmlFor="Jquery">Jquery</label>
 							</div>
 							{
 								//Chartjs uchun checkbox
@@ -586,9 +586,9 @@ export default function Settings(props) {
 									checked={LibrariesContainerObject.ChartJs.check}
 									onChange={LibrariesContainerObject.ChartJs.onChange}
 									name="css-libraries"
-									id="tailwindCss"
+									id="chartJS"
 								/>
-								<label htmlFor="tailwindCss">ChartJs</label>
+								<label htmlFor="chartJs">ChartJs</label>
 							</div>
 							{
 								//AnimateJS uchun checkbox
@@ -599,9 +599,9 @@ export default function Settings(props) {
 									checked={LibrariesContainerObject.Animate.checkJs}
 									onChange={LibrariesContainerObject.Animate.onchangeJs}
 									name="css-libraries"
-									id="animateCss"
+									id="animateJS"
 								/>
-								<label htmlFor="animateCss">AnimateJS</label>
+								<label htmlFor="animateJs">AnimateJS</label>
 							</div>
 							{
 								//VideoJS uchun checkbox
@@ -612,9 +612,9 @@ export default function Settings(props) {
 									checked={LibrariesContainerObject.VideoJs.checkJS}
 									onChange={LibrariesContainerObject.VideoJs.onChangeJs}
 									name="css-libraries"
-									id="fontAwesome"
+									id="videoJs"
 								/>
-								<label htmlFor="fontAwesome">VideoJs</label>
+								<label htmlFor="videoJs">VideoJs</label>
 							</div>
 						</form>
 					</div>

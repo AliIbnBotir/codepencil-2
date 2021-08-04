@@ -19,29 +19,60 @@ body {
   border-right: 10px solid #444857;
   height: 100%;
 }
+
 .container {
   width: 100%;
   flex: 1 1 100%;
   height: calc(100% - 65px);
   display: flex;
+  position: relative;
 }
 .pane {
   height: 100%;
   display: flex;
+  flex-wrap: wrap;
   flex: 1 1 50%;
   flex-direction: column;
 }
-
+.editor-wrapper {
+  flex-grow: 1;
+  flex-basis: 0;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: hsl(225, 6%, 25%);
+  height: 100%;
+  /* display: none; */
+}
+.editor-wrapper.unvisible {
+  display: none;
+}
+.editor-wrapper.collapsed {
+  flex-grow: 0;
+}
+.resize-panel.unvisible {
+  display: none;
+}
+.btn-for-visible-editor-pane {
+  position: absolute;
+  opacity: 0.5;
+  bottom: 20px;
+  left: 20px;
+}
+.btn-for-visible-editor-pane.unvisible {
+  display: none;
+}
 .editor-container {
   flex-grow: 1;
   flex-basis: 0;
   display: flex;
   flex-direction: column;
   position: relative;
-
+  width: 100%;
   box-sizing: border-box;
   background-color: hsl(225, 6%, 25%);
-  height: 100%;
+  height: 100% !important;
 }
 .resizable {
   padding: 15px;
@@ -166,12 +197,22 @@ button {
   display: flex;
   align-items: center;
 }
-.nav-wrap {
+.nav-wrap,
+.unvisible-on-mobile {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
+@media screen and(max-width:1500px) {
+  .logo-box {
+    flex: 1 1 5%;
+  }
+}
+.account-btn {
+  margin-right: 10px;
+}
+
 button {
   display: flex;
   align-items: center;
@@ -421,4 +462,132 @@ textarea {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+/*media*/
+
+@media screen and (max-width: 1500px) {
+  .logo-box {
+    flex: 1 1 5%;
+  }
+  .project-info {
+    flex: 1 1 65%;
+  }
+  .editor-action-menu {
+    flex: 1 1 30%;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .logo-box {
+    flex: 1 1 5%;
+  }
+  .project-info {
+    flex: 52%;
+  }
+  .editor-action-menu {
+    flex: 40%;
+  }
+}
+@media screen and (max-width: 992px) {
+  .project-info {
+    flex: 50%;
+  }
+  .editor-action-menu {
+    flex: 42%;
+  }
+}
+@media screen and (max-width: 830px) {
+  .container {
+    height: calc(100% - 45px);
+  }
+  .project-info {
+    flex: 82%;
+    padding: 0;
+  }
+  .editor-action-menu {
+    flex: 10%;
+  }
+  .unvisible-on-mobile {
+    display: none;
+  }
+  .main-header {
+    height: 45px;
+  }
+  .header-wrap {
+    padding: 5px 0;
+  }
+  .editable-title {
+    line-height: 0.7;
+  }
+  .editable-title > a {
+    font-size: 20px;
+  }
+  .username > a {
+    font-size: 14px;
+  }
+  .account-btn {
+    height: 30px;
+    padding: 5px;
+  }
+  .menu-bar-icon.user-icon {
+    font-size: 25px;
+  }
+  .logo-for-desktop {
+    display: none;
+  }
+  .logo-for-mobile {
+    display: block;
+  }
+}
+
+@media (max-width: 767px) and (orientation: landscape),
+  (max-height: 440px) and (orientation: landscape) {
+  .container {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .expand-collapse-btn {
+    display: none;
+  }
+
+  .editor-pane {
+    border: none;
+  }
+  .resize-panel {
+    /* min-height: 50% !important; */
+    /* width: 50% !important; */
+    flex: 1 1 50%;
+  }
+
+  .output-pane {
+    flex: 1 1 50%;
+  }
+  .output-pane.unvisible {
+    display: none;
+  }
+  .editor-title {
+    display: none;
+  }
+  .mobile-editor-nav {
+    display: flex !important;
+    flex: 1 1 100%;
+    max-height: 32px;
+  }
+  .mobile-editor-nav-wrapper {
+    display: flex;
+    align-items: flex-end;
+    margin: 0;
+    margin-left: 10vw;
+  }
+  .mobile-editor-nav-btn {
+    height: 25px;
+  }
+  .mobile-editor-wrap-btn {
+    height: 85%;
+    margin-right: 5px;
+  }
+  .mobile-editor-wrap-btn.active-btn {
+    background-color: gray;
+    border-bottom: 2px solid white;
+  }
 }

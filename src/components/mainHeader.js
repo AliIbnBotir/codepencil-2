@@ -36,20 +36,22 @@ export default function mainHeader(props) {
 				</div>
 				<div className="editor-action-menu">
 					<div className="nav-wrap">
-						<button
-							className="setting-btn"
-							onClick={() => {
-								setPenSetting(true);
-							}}
-						>
-							<FontAwesomeIcon icon={faCog} className="menu-bar-icon" />
+						<div className="unvisible-on-mobile">
+							<button
+								className="setting-btn"
+								onClick={() => {
+									setPenSetting(true);
+								}}
+							>
+								<FontAwesomeIcon icon={faCog} className="menu-bar-icon" />
 
-							<h1 className="unvis-mobile">Setting</h1>
-						</button>
-						<button className="save-btn">
-							<FontAwesomeIcon icon={faCloud} className="menu-bar-icon" />
-							<h1 className="unvis-mobile">Save</h1>
-						</button>
+								<h1 className="unvis-mobile">Setting</h1>
+							</button>
+							<button className="save-btn">
+								<FontAwesomeIcon icon={faCloud} className="menu-bar-icon" />
+								<h1 className="unvis-mobile">Save</h1>
+							</button>
+						</div>
 						<button className="account-btn">
 							<FontAwesomeIcon
 								icon={faUser}

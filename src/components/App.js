@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
+import MetaTags from "react-meta-tags";
 import Editor from "./Editor";
 
 import Settings from "./Settings";
 import useLocalStorage from "../hooks/useLocalStorage";
+import useWindowDimensions from "../hooks/useWindowDimensions";
 import { Resizable } from "re-resizable";
 import MainHeader from "./mainHeader";
 // import ResizePanel from "react-resize-panel";
 //import ResizePanel from "../../src/ResizePanel";
 
 function App() {
+	const { height, width } = useWindowDimensions();
 	const [html, setHtml] = useLocalStorage("html", "");
 	const [css, setCss] = useLocalStorage("css", "");
 	const [js, setJs] = useLocalStorage("js", "");
@@ -23,7 +26,7 @@ function App() {
 	const [Link, setLink] = useLocalStorage("link", "");
 	const [script, setScript] = useLocalStorage("script", "");
 
-	//Css va Js uchun kutubxonalar
+	//Css va Js kutubxonalari uchun o'zgaruvchilar
 
 	/*Css uchun kutubxonalar*/
 	const [bootstrapCss, setBootstrapCss] = useLocalStorage("bootstrapCss", "");
@@ -43,13 +46,9 @@ function App() {
 	const [videoCss, setVideoCss] = useLocalStorage("videoCss", "");
 	const [chartJs, setChartJs] = useLocalStorage("chartJs", "");
 
-	{
-		//checkboxlar uchun ozgaruvchilar
-	}
+	//Checkboxlar uchun ozgaruvchilar
 
-	{
-		/*css sozlash checkboxlari*/
-	}
+	/*css sozlash checkboxlari*/
 
 	const [bootstrapcheck, setBootstrapCheck] = useLocalStorage(
 		"bootstrapcheck",
@@ -68,9 +67,7 @@ function App() {
 		""
 	);
 
-	{
-		/*js sozlash checkboxlari*/
-	}
+	/*js sozlash checkboxlari*/
 
 	const [jqueryCheck, setJqueryCheck] = useLocalStorage("jqueryCheck", "");
 	const [animateJsCheck, setAnimateJsCheck] = useLocalStorage(
@@ -80,6 +77,26 @@ function App() {
 	const [videoJsCheck, setVideoJsCheck] = useLocalStorage("videoJsCheck", "");
 	const [chartJsCheck, setChartJsCheck] = useLocalStorage("chartJsCheck", "");
 
+	//editorlar uchun resizing husisiyatlari
+	const [top, setTop] = useState(true);
+	const [blockedTop, setBlockedTop] = useState(false);
+
+	//mobilnida editor navbar uchun buttonlar
+
+	const [HtmlWrapperCollapse, setHtmlWrapperCollapse] = useState(true);
+
+	const [CssWrapperCollapse, setCssWrapperCollapse] = useState(true);
+	const [JsWrapperCollapse, setJsWrapperCollapse] = useState(true);
+	const [mobileHtmlWrapperVisible, setMobileHtmlWrapperVisble] = useState(true);
+
+	const [mobileCssWrapperVisible, setMobileCssWrapperVisible] = useState(true);
+
+	const [mobileJsWrapperVisible, setMobileJsWrapperVisible] = useState(true);
+
+	const [mobileResultVisible, setMobileResultVisible] = useState(true);
+	const [editorPaneVisible, setEditorPaneVisible] = useState(true);
+
+	//outputni vaqt intervali bilan chiqarish uchun UseEffect
 	useEffect(() => {
 		const timeout = setTimeout(() => {
 			setSrcDoc(`
@@ -118,9 +135,88 @@ function App() {
 		fontAwesomeCss,
 		bootstrapJs,
 	]);
-
+	// const ClassName = () => {
+	// 	if (!open) {
+	// 		return "collapsed";
+	// 	} else if (mobileEditorNavHtml) {
+	// 		return "closed-html";
+	// 	} else if (mobileEditorNavCss) {
+	// 		return "closed-css";
+	// 	} else if (mobileEditorNavJs) {
+	// 		return "closed-js";
+	// 	}
+	// };
+	const visibleAndCollapseClassNameForHtmlWrapper = () => {
+		if (!HtmlWrapperCollapse) {
+			return "collapsed";
+		} else if (!mobileHtmlWrapperVisible) {
+			return "unvisible";
+		}
+	};
+	const visibleAndCollapseClassNameForCssWrapper = () => {
+		if (!CssWrapperCollapse) {
+			return "collapsed";
+		} else if (!mobileCssWrapperVisible) {
+			return "unvisible";
+		}
+	};
+	const visibleAndCollapseClassNameForJsWrapper = () => {
+		if (!JsWrapperCollapse) {
+			return "collapsed";
+		} else if (!mobileJsWrapperVisible) {
+			return "unvisible";
+		}
+	};
+	const visibleClassNameForResult = () => {
+		if (!mobileResultVisible) {
+			return "unvisible";
+		}
+	};
+	const [countHtml, setCountHtml] = useState(1);
+	const [countCss, setCountCss] = useState(1);
+	const [countJs, setCountJs] = useState(1);
+	const counterHtml = () => {
+		setCountHtml(countHtml + 1);
+	};
+	const counterCss = () => {
+		setCountCss(countCss + 1);
+	};
+	const counterJs = () => {
+		setCountJs(countJs + 1);
+	};
+	window.addEventListener("resize", () => {
+		if (width <= 767 && width >= 600) {
+			setMobileHtmlWrapperVisble(true);
+			setMobileCssWrapperVisible(false);
+			setMobileJsWrapperVisible(false);
+		} else if (width >= 768 && width <= 900) {
+			setMobileHtmlWrapperVisble(true);
+			setMobileCssWrapperVisible(true);
+			setMobileJsWrapperVisible(true);
+		}
+		console.log(width);
+	});
+	window.addEventListener("load", () => {
+		if (width <= 767) {
+			setMobileHtmlWrapperVisble(true);
+			setMobileCssWrapperVisible(false);
+			setMobileJsWrapperVisible(false);
+		} else if (width >= 767) {
+			setMobileHtmlWrapperVisble(true);
+			setMobileCssWrapperVisible(true);
+			setMobileJsWrapperVisible(true);
+		}
+		console.log(width);
+	});
 	return (
 		<div className="App">
+			<MetaTags>
+				<title>{ProjectTitle}</title>
+				<meta
+					name="viewport"
+					content="width=device-width, initial-scale=1.0"
+				></meta>
+			</MetaTags>
 			<div
 				onClick={() => {
 					setPenSetting(!penSetting);
@@ -191,9 +287,23 @@ function App() {
 				cssSetting={cssSetting}
 				jsSetting={jsSetting}
 			/>
+
 			<div className="container">
+				<button
+					className={`btn-for-visible-editor-pane ${
+						editorPaneVisible ? "unvisible" : ""
+					}`}
+					onClick={() => {
+						setEditorPaneVisible(true);
+						// setCountCss(countCss + 1);
+						// setCountHtml(countHtml + 1);
+						// setCountJs(countJs + 1);
+					}}
+				>
+					Code
+				</button>
 				<Resizable
-					className="resize-panel"
+					className={`resize-panel ${editorPaneVisible ? "" : "unvisible"}`}
 					minWidth={"200px"}
 					maxHeight={"100%"}
 					minHeight={"100%"}
@@ -201,28 +311,138 @@ function App() {
 					enable={{ bottom: false, right: true }}
 				>
 					<div className="pane editor-pane">
-						<Editor
-							language="xml"
-							displayName="HTML"
-							value={html}
-							onChange={setHtml}
-						/>
-						<Editor
-							language="css"
-							displayName="CSS"
-							value={css}
-							onChange={setCss}
-						/>
-						<Editor
-							language="javascript"
-							displayName="JS"
-							value={js}
-							onChange={setJs}
-							className="js-editor"
-						/>
+						<div style={{ display: "none" }} className="mobile-editor-nav">
+							<div className="mobile-editor-nav-wrapper">
+								<button
+									className={`mobile-editor-wrap-btn ${
+										mobileHtmlWrapperVisible ? "active-btn" : ""
+									}`}
+									onClick={() => {
+										counterHtml();
+										setCountCss(1);
+										setCountJs(1);
+										console.log("html " + countHtml);
+										if (countHtml % 2 === 1) {
+											setMobileHtmlWrapperVisble(true);
+											setMobileCssWrapperVisible(false);
+											setMobileJsWrapperVisible(false);
+										} else {
+											setEditorPaneVisible(false);
+										}
+									}}
+								>
+									HTML
+								</button>
+								<button
+									className={`mobile-editor-wrap-btn ${
+										mobileCssWrapperVisible ? "active-btn" : ""
+									}`}
+									onClick={() => {
+										counterCss();
+										setCountHtml(1);
+										setCountJs(1);
+										console.log("css " + countCss);
+										if (countCss % 2 === 1) {
+											setMobileCssWrapperVisible(true);
+											setMobileHtmlWrapperVisble(false);
+											setMobileJsWrapperVisible(false);
+										} else {
+											setEditorPaneVisible(false);
+										}
+									}}
+								>
+									CSS
+								</button>
+								<button
+									className={`mobile-editor-wrap-btn ${
+										mobileJsWrapperVisible ? "active-btn" : ""
+									}`}
+									onClick={() => {
+										counterJs();
+										setCountHtml(1);
+										setCountCss(1);
+										console.log("js " + countJs);
+										if (countJs % 2 === 1) {
+											setMobileJsWrapperVisible(true);
+											setMobileCssWrapperVisible(false);
+											setMobileHtmlWrapperVisble(false);
+										} else {
+											setEditorPaneVisible(false);
+										}
+									}}
+								>
+									JS
+								</button>
+								<button
+									className={`mobile-editor-wrap-btn ${
+										mobileResultVisible ? "active-btn" : ""
+									}`}
+									onClick={() => {
+										setMobileResultVisible(!mobileResultVisible);
+									}}
+								>
+									Result
+								</button>
+							</div>
+						</div>
+						<div
+							className={`editor-wrapper html-editor-wrapper ${visibleAndCollapseClassNameForHtmlWrapper()}`}
+						>
+							<Editor
+								language="xml"
+								displayName="HTML"
+								value={html}
+								onChange={setHtml}
+								top={blockedTop}
+								HtmlWrapperCollapse={HtmlWrapperCollapse}
+								CssWrapperCollapse={CssWrapperCollapse}
+								JsWrapperCollapse={JsWrapperCollapse}
+								setHtmlWrapperCollapse={setHtmlWrapperCollapse}
+								setCssWrapperCollapse={setCssWrapperCollapse}
+								setJsWrapperCollapse={setJsWrapperCollapse}
+								// ClassName={ClassName()}
+							/>
+						</div>
+						<div
+							className={`editor-wrapper css-editor-wrapper ${visibleAndCollapseClassNameForCssWrapper()}`}
+						>
+							<Editor
+								language="css"
+								displayName="CSS"
+								value={css}
+								onChange={setCss}
+								top={top}
+								HtmlWrapperCollapse={HtmlWrapperCollapse}
+								CssWrapperCollapse={CssWrapperCollapse}
+								JsWrapperCollapse={JsWrapperCollapse}
+								setHtmlWrapperCollapse={setHtmlWrapperCollapse}
+								setCssWrapperCollapse={setCssWrapperCollapse}
+								setJsWrapperCollapse={setJsWrapperCollapse}
+								// ClassName={ClassName()}
+							/>
+						</div>
+						<div
+							className={`editor-wrapper js-editor-wrapper ${visibleAndCollapseClassNameForJsWrapper()}`}
+						>
+							<Editor
+								language="javascript"
+								displayName="JS"
+								value={js}
+								onChange={setJs}
+								className="js-editor"
+								top={top}
+								HtmlWrapperCollapse={HtmlWrapperCollapse}
+								CssWrapperCollapse={CssWrapperCollapse}
+								JsWrapperCollapse={JsWrapperCollapse}
+								setHtmlWrapperCollapse={setHtmlWrapperCollapse}
+								setCssWrapperCollapse={setCssWrapperCollapse}
+								setJsWrapperCollapse={setJsWrapperCollapse}
+								// ClassName={ClassName()}
+							/>
+						</div>
 					</div>
 				</Resizable>
-				<div className="pane output-pane">
+				<div className={`pane output-pane ${visibleClassNameForResult()}`}>
 					<iframe
 						srcDoc={srcDoc}
 						title="output"
