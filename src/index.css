@@ -586,6 +586,9 @@ textarea {
     flex-direction: row;
     flex-wrap: wrap;
   }
+  .settings-header .title {
+    flex: 1 1 80%;
+  }
   .logo-box {
     flex: 1 1 7%;
   }
