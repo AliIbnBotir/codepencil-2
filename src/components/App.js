@@ -185,14 +185,15 @@ function App() {
 		setCountJs(countJs + 1);
 	};
 	window.addEventListener("resize", () => {
-		if (width <= 767 && width >= 600) {
+		if (width <= 767) {
 			setMobileHtmlWrapperVisble(true);
 			setMobileCssWrapperVisible(false);
 			setMobileJsWrapperVisible(false);
-		} else if (width >= 768 && width <= 900) {
+		} else if (width >= 767) {
 			setMobileHtmlWrapperVisble(true);
 			setMobileCssWrapperVisible(true);
 			setMobileJsWrapperVisible(true);
+			setMobileResultVisible(true);
 		}
 		console.log(width);
 	});
@@ -201,7 +202,7 @@ function App() {
 			setMobileHtmlWrapperVisble(true);
 			setMobileCssWrapperVisible(false);
 			setMobileJsWrapperVisible(false);
-		} else if (width >= 767) {
+		} else if (width > 767) {
 			setMobileHtmlWrapperVisble(true);
 			setMobileCssWrapperVisible(true);
 			setMobileJsWrapperVisible(true);

@@ -42,7 +42,7 @@ body {
   width: 100%;
   box-sizing: border-box;
   background-color: hsl(225, 6%, 25%);
-  height: 100%;
+
   /* display: none; */
 }
 .editor-wrapper.unvisible {
@@ -131,6 +131,7 @@ body {
   width: 100%;
   height: 100%;
   flex-wrap: wrap;
+  position: relative;
 }
 .logo-root {
   width: 100%;
@@ -196,6 +197,13 @@ button {
   flex: 1 1 40%;
   display: flex;
   align-items: center;
+}
+.menu-bar.visible-on-mobile {
+  display: none;
+  width: 30px;
+  height: 30px;
+  margin-right: 15px;
+  padding: 5px;
 }
 .nav-wrap,
 .unvisible-on-mobile {
@@ -277,9 +285,12 @@ button {
 .settings-header .title h2 {
   height: 100%;
   align-items: center;
+  display: flex;
 
-  padding: 15px 0 0 0;
   border-bottom: 2px solid #47cf73;
+}
+.settings-close-save-btn {
+  height: 80%;
 }
 .settings-close-save-btn button {
   padding: 12px;
@@ -507,14 +518,44 @@ textarea {
   .editor-action-menu {
     flex: 10%;
   }
+  .menu-bar.visible-on-mobile {
+    display: block;
+  }
   .unvisible-on-mobile {
     display: none;
+
+    position: absolute;
+  }
+  .unvisible-on-mobile.visible {
+    display: block;
+    display: block;
+    position: absolute;
+    z-index: 400;
+    top: 100%;
+    right: 0;
+    width: 225px;
+    max-height: 75vh;
+    /* padding: 0.5rem 0; */
+    overflow: hidden;
+    overflow-y: auto;
+    background: rgb(68, 72, 87);
+    -webkit-box-shadow: 0 2rem 4rem rgb(68 72 87);
+    box-shadow: 0 2rem 4rem rgb(68 72 87);
+    /* opacity: 0; */
+    /* visibility: hidden; */
+    /* -webkit-transform: scale(0.9); */
+    transform: scale(0.9);
+    /* -webkit-transform-origin: top right; */
+    transform-origin: top right;
   }
   .main-header {
     height: 45px;
   }
   .header-wrap {
     padding: 5px 0;
+  }
+  .settings-close-save-btn button {
+    height: 100%;
   }
   .editable-title {
     line-height: 0.7;
@@ -540,11 +581,19 @@ textarea {
   }
 }
 
-@media (max-width: 767px) and (orientation: landscape),
-  (max-height: 440px) and (orientation: landscape) {
+@media (max-width: 767px), (max-height: 440px) {
   .container {
     flex-direction: row;
     flex-wrap: wrap;
+  }
+  .logo-box {
+    flex: 1 1 7%;
+  }
+  .editor-action-menu {
+    flex: 1 1 8%;
+  }
+  .project-info {
+    flex: 1 1 75%;
   }
   .expand-collapse-btn {
     display: none;
@@ -554,11 +603,59 @@ textarea {
     border: none;
   }
   .resize-panel {
-    /* min-height: 50% !important; */
+    min-height: 50% !important;
     /* width: 50% !important; */
     flex: 1 1 50%;
   }
-
+  .save-btn,
+  .setting-btn {
+    font-size: 10px;
+    height: auto;
+    padding: 3px 8px;
+  }
+  .settings-close-save-btn button {
+    height: 100%;
+  }
+  .tabs-nav {
+    flex: 1 1 100%;
+    height: 15%;
+  }
+  .tabs-nav a {
+    font-size: 20px;
+    padding: 5px;
+  }
+  .tabs-nav a.active-nav-js,
+  .tabs-nav a.active-nav-html,
+  .tabs-nav a.active-nav-css {
+    border: none;
+  }
+  .tabs .setting {
+    height: 80%;
+  }
+  .tabs-group {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+  }
+  .setting-row h4 {
+    font-size: 16px;
+  }
+  .setting-row input,
+  textarea {
+    height: 30px;
+  }
+  .setting-form label {
+    font-size: 16px;
+  }
+  .understand-info {
+    left: 40%;
+  }
+  .understand-info p {
+    font-size: 14px;
+  }
+  .menu-bar-icon {
+    font-size: 15px;
+  }
   .output-pane {
     flex: 1 1 50%;
   }
@@ -589,5 +686,31 @@ textarea {
   .mobile-editor-wrap-btn.active-btn {
     background-color: gray;
     border-bottom: 2px solid white;
+  }
+}
+@media screen and (max-width: 490px) {
+  .logo-box {
+    flex: 1 1 10%;
+  }
+  .project-info {
+    flex: 1 1 60%;
+  }
+  .editor-action-menu {
+    flex: 1 1 30%;
+  }
+  .resize-panel {
+    flex: 1 1 100%;
+    min-height: 50% !important;
+  }
+  .pane.output-pane {
+    flex: 1 1 100%;
+  }
+  .mobile-editor-nav-wrapper {
+    margin: auto;
+  }
+}
+@media (max-width: 300px) {
+  body {
+    min-width: 300px;
   }
 }

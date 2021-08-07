@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import "../index.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCog, faUser, faCloud } from "@fortawesome/free-solid-svg-icons";
+import {
+	faCog,
+	faUser,
+	faCloud,
+	faBars,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function mainHeader(props) {
 	const {
@@ -14,6 +19,7 @@ export default function mainHeader(props) {
 		cssSetting,
 		jsSetting,
 	} = props;
+	const [menuBarOnMobileHandler, setMenuBarOnMobileHandler] = useState();
 	return (
 		<div className="main-header">
 			<div className="header-wrap">
@@ -36,18 +42,41 @@ export default function mainHeader(props) {
 				</div>
 				<div className="editor-action-menu">
 					<div className="nav-wrap">
-						<div className="unvisible-on-mobile">
+						<button
+							className="menu-bar visible-on-mobile"
+							onClick={() => {
+								setMenuBarOnMobileHandler(
+									(prevmenuBarOnMobileHandler) => !prevmenuBarOnMobileHandler
+								);
+							}}
+						>
+							<FontAwesomeIcon
+								icon={faBars}
+								className="menu-bar-for-mobile"
+							></FontAwesomeIcon>
+						</button>
+						<div
+							className={`unvisible-on-mobile ${
+								menuBarOnMobileHandler ? "visible" : ""
+							}`}
+						>
 							<button
 								className="setting-btn"
 								onClick={() => {
 									setPenSetting(true);
+									setMenuBarOnMobileHandler(!menuBarOnMobileHandler);
 								}}
 							>
 								<FontAwesomeIcon icon={faCog} className="menu-bar-icon" />
 
 								<h1 className="unvis-mobile">Setting</h1>
 							</button>
-							<button className="save-btn">
+							<button
+								className="save-btn"
+								onClick={() => {
+									setMenuBarOnMobileHandler(!menuBarOnMobileHandler);
+								}}
+							>
 								<FontAwesomeIcon icon={faCloud} className="menu-bar-icon" />
 								<h1 className="unvis-mobile">Save</h1>
 							</button>
