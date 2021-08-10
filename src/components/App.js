@@ -83,18 +83,25 @@ function App() {
 
 	//mobilnida editor navbar uchun buttonlar
 
-	const [HtmlWrapperCollapse, setHtmlWrapperCollapse] = useState(true);
+	const [HtmlWrapperCollapse, setHtmlWrapperCollapse] = useLocalStorage("", "");
 
-	const [CssWrapperCollapse, setCssWrapperCollapse] = useState(true);
-	const [JsWrapperCollapse, setJsWrapperCollapse] = useState(true);
-	const [mobileHtmlWrapperVisible, setMobileHtmlWrapperVisble] = useState(true);
+	const [CssWrapperCollapse, setCssWrapperCollapse] = useLocalStorage("", "");
+	const [JsWrapperCollapse, setJsWrapperCollapse] = useLocalStorage("", "");
+	const [mobileHtmlWrapperVisible, setMobileHtmlWrapperVisble] =
+		useLocalStorage("", "");
 
-	const [mobileCssWrapperVisible, setMobileCssWrapperVisible] = useState(true);
+	const [mobileCssWrapperVisible, setMobileCssWrapperVisible] = useLocalStorage(
+		"",
+		""
+	);
 
-	const [mobileJsWrapperVisible, setMobileJsWrapperVisible] = useState(true);
+	const [mobileJsWrapperVisible, setMobileJsWrapperVisible] = useLocalStorage(
+		"",
+		""
+	);
 
-	const [mobileResultVisible, setMobileResultVisible] = useState(true);
-	const [editorPaneVisible, setEditorPaneVisible] = useState(true);
+	const [mobileResultVisible, setMobileResultVisible] = useLocalStorage("", "");
+	const [editorPaneVisible, setEditorPaneVisible] = useLocalStorage("", "");
 
 	//outputni vaqt intervali bilan chiqarish uchun UseEffect
 	useEffect(() => {
